@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask,jsonify
+import requests
 app = Flask(__name__)
 
 @app.route("/")
@@ -7,8 +8,12 @@ def hello_world():
 
 @app.route("/dog")
 def hello_dog():
-    return "Hi, You have choosen DOG"
+    url = 'https://dog.ceo/api/breeds/image/random'
+    response = requests.get(url)
+    return jsonify(response.text)
 
 @app.route("/cat")
 def hello_cat():
-    return "Hi, You have choosen CAT"
+    url = 'https://catfact.ninja/fact'
+    response = requests.get(url)
+    return jsonify(response.text)
